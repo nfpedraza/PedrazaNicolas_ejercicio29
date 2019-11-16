@@ -4,30 +4,26 @@
 
 using namespace std;
 
-
-FILE *output;
-
 int main ()
 {
-    int numx=100;
-    int numt=2000;
-    double dx=1.0/numx;
-    double dt=0.00005;
-    double C[numx][numt];
+    int x_n=100;
+    int t_n=2000;
+    double sigma = 0.2;
+    double dx=1.0/x_n;
+    double dt= sigma * pow(dx,2.0);
+    double C[x_n][t_n];
     double x=0.0;
-    int i=0, j=0;
     double mu=0.5;
-    double sigma=0.05;
-
+    double alpha= dt/pow(dx,2.0);
 
     ofstream fout("Clase_29.dat");
 
 
-    for(i=0; i < numx; i++){                         //intial condition         
+    for(int i=0; i < numx; i++){                         //intial condition         
         x=i*dx;
         C[i][0]=
             exp(-pow((x-mu),2.0)/(2.0*pow(sigma,2.0)))/pow(
-                (2.0*PI*pow(sigma,2.0)),0.5);
+                (2.0*M_PI*pow(sigma,2.0)),0.5);
     }
     C[0][0]=0.0;
 
@@ -36,27 +32,17 @@ int main ()
     // MAXIMUM subscripts are numx-1 and numt-1, as arrays are indexed          
     // starting from 0                                                          
     ///////////////////////////////////////////////////////////////////         
-    C[numx-1][0]=0.0;
+    C[x_n-1][0]=0.0;
 
 ///////////////////////////////////                                             
 //    fprintf(output, "%e\n\n", C[2][0]);                                       
 ///////////////////////////////////                                             
 
-    for(j = 0;
-        j < numt - 1; // This must be numt-1, else                              
-                      // the j+1 in the calculation below                       
-                      // will overstep the bounds of the array                  
-        j++){
-
-        ///////////////////////////////////////////////////////////////////     
-        // This must be numx-1, else you're going past the end of the array     
-        // in the calculation                                                   
-        ///////////////////////////////////////////////////////////////////     
-        for(i=1; i<numx-1; i++){
+    for(int j = 0; j < t_n - 1; j++){
+        
+        for(int i=1; i<numx-1; i++){
             x=i*dx;
-
-            C[i][j+1] = C[i][j] +
-                (dt/pow(dx,2))*(C[i+1][j] - 2*C[i][j] + C[i-1][j]);
+            C[i][j+1] = C[i][j] +(dt/pow(dx,2))*(C[i+1][j] - 2*C[i][j] + C[i-1][j]);
         }
 /////////////////////////////////                                               
 //        fprintf(output, "%e\n", C[2][0]);                                     
