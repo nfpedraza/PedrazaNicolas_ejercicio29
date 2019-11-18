@@ -18,12 +18,9 @@ int main ()
 
     ofstream fout("Clase_29.dat");
 
-
-    for(int i=0; i < numx; i++){                         //intial condition         
+    for(int i=0; i < x_n; i++){                         //intial condition         
         x=i*dx;
-        C[i][0]=
-            exp(-pow((x-mu),2.0)/(2.0*pow(sigma,2.0)))/pow(
-                (2.0*M_PI*pow(sigma,2.0)),0.5);
+        C[i][0]= exp(-pow((x-mu),2.0)/(2.0*pow(sigma,2.0)))/pow((2.0*M_PI*pow(sigma,2.0)),0.5);
     }
     C[0][0]=0.0;
 
@@ -31,7 +28,8 @@ int main ()
     // This must be numx-1, else you're going past the end of the array         
     // MAXIMUM subscripts are numx-1 and numt-1, as arrays are indexed          
     // starting from 0                                                          
-    ///////////////////////////////////////////////////////////////////         
+    ///////////////////////////////////////////////////////////////////  
+    
     C[x_n-1][0]=0.0;
 
 ///////////////////////////////////                                             
@@ -40,10 +38,11 @@ int main ()
 
     for(int j = 0; j < t_n - 1; j++){
         
-        for(int i=1; i<numx-1; i++){
+        for(int i=1; i<x_n-1; i++){
             x=i*dx;
             C[i][j+1] = C[i][j] +(dt/pow(dx,2))*(C[i+1][j] - 2*C[i][j] + C[i-1][j]);
         }
+        
 /////////////////////////////////                                               
 //        fprintf(output, "%e\n", C[2][0]);                                     
 /////////////////////////////////                                               
@@ -52,27 +51,27 @@ int main ()
         ///////////////////////////////////////////////////////////////////     
         // This must be numx-1, else you're going past the end of the array     
         ///////////////////////////////////////////////////////////////////     
-        C[numx-1][j+1]=0.0;                        //boundary condition ii)     
+        C[x_n-1][j+1]=0.0;                        //boundary condition ii)     
 
     }
 
-    for (i = 0; i < numx; ++i)
+    for (int i = 0; i < x_n; ++i)
     {
         x = i * dx;
-        fprintf(output, "%e\t", x);
+        fout<<x;
         
-        for (j = 0; j < numt; ++j)
+        for (int j = 0; j < t_n; ++j)
         {
-            fprintf(output, "%e\t", C[i][j]);
+            fout<<C[i][j];
         }
-        fprintf(output, "\n");
+        fout<<"\n";
     }
+    
 ///////////////////////////////////                                             
 //    fprintf(output, "\n%e\n", C[2][0]);                                       
 ///////////////////////////////////                                             
 
-    fflush(output);
-    fclose(output);
+    fout.close();
 
     return 0; // Need to return an int here.                                    
 }
