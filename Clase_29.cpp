@@ -9,8 +9,7 @@ using namespace std;
 int main ()
 {
     const int x_n=30;
-	const int x_n2=31;
-    const int t_n=120;
+    const int t_n=30;
     const double sigma = 1.0;
     const double D= 1.0;
     double dx=1.0/x_n;
