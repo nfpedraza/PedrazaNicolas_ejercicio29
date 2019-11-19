@@ -9,19 +9,19 @@ using namespace std;
 int main ()
 {
     const int x_n=30;
-    const int t_n=10;
+	const int x_n2=31;
+    const int t_n=120;
     const double sigma = 1.0;
     const double D= 1.0;
     double dx=1.0/x_n;
     double dt= sigma * pow(dx,2.0)/2*D;
     double C[x_n][t_n];
-    double x=0.0;
+    double x= -1.0;
     double mu=0.5;
-    double alpha= dt/pow(dx,2.0);
-
+	
     ofstream fout("Clase_29.dat");
 
-    for(int i=0; i < x_n; i++){                         //intial condition         
+    for(int i=0; i < x_n; i++){                         //condicional inicial       
         x=i*dx;
         C[i][0]= exp(-pow((x-mu),2.0)/(2.0*pow(sigma,2.0)))/pow((2.0*M_PI*pow(sigma,2.0)),0.5);
     }
@@ -58,6 +58,6 @@ int main ()
     }
 
     fout.close();
-
+	
     return 0;                                    
 }
