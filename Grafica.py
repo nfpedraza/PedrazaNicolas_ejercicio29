@@ -7,7 +7,7 @@ data = np.loadtxt("Clase_29.dat")
 plt.figure(1, figsize=(10,5)) 
 
 plt.subplot(1,3,1)
-plt.imshow(data)
+plt.imshow(data.T)
 plt.xlabel('Posicion')
 plt.ylabel('Tiempo')
 
@@ -30,7 +30,7 @@ plt.savefig("graph1.png")
 plt.figure(2, figsize=(10,5)) 
 
 plt.subplot(1,3,1)
-plt.imshow(data)
+plt.imshow(data.T)
 plt.xlabel('Posicion')
 plt.ylabel('Tiempo')
 
@@ -53,7 +53,7 @@ plt.savefig('graph2.png')
 plt.figure(3, figsize=(10,5)) 
 
 plt.subplot(1,3,1)
-plt.imshow(data)
+plt.imshow(data.T)
 plt.xlabel('Posicion')
 plt.ylabel('Tiempo')
 
@@ -77,7 +77,7 @@ plt.savefig('graph3.png')
 plt.figure(1, figsize=(10,5)) 
 
 plt.subplot(1,3,1)
-plt.imshow(data)
+plt.imshow(data.T)
 plt.xlabel('Posicion')
 plt.ylabel('Tiempo')
 
